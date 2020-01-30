@@ -22,4 +22,9 @@ object Effectful {
     stream.compile.toList.unsafeRunSync
   def executeEffectsAndIgnoreResultFromStream(stream: Stream[IO, String]): Unit =
     stream.compile.drain.unsafeRunSync
+  def printBeforeAndAfter(logger: Logger, stream: Stream[IO, Int]): Stream[IO, Int] = {
+    val before = IO { logger.log("Starting") }
+    val after = IO { logger.log("Finishing") }
+    Stream.bracket(before)(_ => after).flatMap(_ => stream)
+  }
 }

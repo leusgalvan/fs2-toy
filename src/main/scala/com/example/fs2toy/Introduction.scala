@@ -22,6 +22,10 @@ object Introduction {
 
   def createInfiniteTongueTwister(): Stream[Pure, String] = Stream("tres", "tristes", "tigres").repeat
 
+  def createInfiniteStreamOfEvenNumbers(): Stream[Pure, Int] = Stream.iterate(0)(_ + 2)
+
+  def createInfiniteStreamOfOnes(): Stream[Pure, Int] = Stream.constant(1)
+
   def takeFirstNaturalNumbers(naturalNumbers: Stream[Pure, Int], n: Int): Stream[Pure, Int] = naturalNumbers.take(n)
 
   case class Person(name: String, age: Int)
@@ -35,4 +39,6 @@ object Introduction {
   def repeatEachWord(words: Stream[Pure, String]): Stream[Pure, String] = words.flatMap(s => Stream(s, s))
 
   def sum(numbers: Stream[Pure, Int]): Stream[Pure, Int] = numbers.fold(0)(_+_)
+
+  def countConsecutiveSuccessfulValues[A](stream: Stream[Pure, A]): Int = stream.attempt.toList.count(_.isRight)
 }

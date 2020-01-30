@@ -46,5 +46,16 @@ class EffectfulSpec extends Specification with Mockito {
       executeEffectsAndIgnoreResultFromStream(stream)
       there was one(logger).log("Executing stream...")
     }
+
+    "print 'Before' before processing and 'After' afterwards even when there are errors" in {
+      val logger = mock[Logger]
+      val stream = Stream(1, 2) ++ Stream.raiseError[IO](new Exception("Oops"))
+      try {
+        printBeforeAndAfter(logger, stream).compile.drain.unsafeRunSync()
+      } catch { case _: Exception => }
+
+      there was one(logger).log("Starting")
+      there was one(logger).log("Finishing")
+    }
   }
 }

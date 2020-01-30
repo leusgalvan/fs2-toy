@@ -1,6 +1,6 @@
 package com.example.fs2toy
 
-import fs2.Stream
+import fs2.{Pure, Stream}
 import org.specs2.mutable.Specification
 
 class IntroductionSpec extends Specification {
@@ -76,6 +76,17 @@ class IntroductionSpec extends Specification {
 
     "create a stream whose only element is the sum of the elements of the given stream" in {
       sum(Stream.range(1, 101)).toList shouldEqual List(5050)
+    }
+
+    "create a stream consisting only of ones" in {
+      createInfiniteStreamOfOnes().take(100).toList.forall(_ == 1) should beTrue
+    }
+
+    "count the exceptions produced by a stream" in {
+      val stream = Stream.range(0, 10) ++
+        Stream.range(10, 20).map(_ => throw new Exception("a")) ++
+        Stream.range(20, 30)
+      countConsecutiveSuccessfulValues(stream) shouldEqual 10
     }
   }
 }
