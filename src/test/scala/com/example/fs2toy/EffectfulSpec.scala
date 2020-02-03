@@ -1,6 +1,7 @@
 package com.example.fs2toy
 
 import cats.effect.IO
+import com.example.fs2toy.Utils.{Logger, SimpleLogger}
 import org.specs2.mutable.Specification
 import org.specs2.mock._
 import fs2.Stream

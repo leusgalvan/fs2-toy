@@ -1,16 +1,10 @@
 package com.example.fs2toy
 
 import cats.effect.IO
+import com.example.fs2toy.Utils.Logger
 import fs2.Stream
 
 object Effectful {
-  trait Logger {
-    def log(s: String): Unit
-  }
-  case class SimpleLogger() extends Logger {
-    override def log(s: String): Unit = println(s)
-  }
-
   def createHelloWorldStream(logger: Logger): Stream[IO, Unit] = Stream.eval(IO {logger.log("Hello world")})
   def createFailingStream(): Stream[IO, Unit] = Stream.raiseError[IO](new Exception("oh no"))
   def recoverFromErrorLoggingMessageAndReturning0(stream: Stream[IO, Int], logger: Logger): Stream[IO, Int] =
