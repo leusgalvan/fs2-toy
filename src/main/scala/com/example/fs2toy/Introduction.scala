@@ -2,43 +2,40 @@ package com.example.fs2toy
 import fs2.{Pure, Stream}
 
 object Introduction {
-  def createSimpleStream(): Stream[Pure, String] = Stream("my", "first", "stream")
+  def createSimpleStream(): Stream[Pure, String] = ???
 
-  def createSingleton(element: Int): Stream[Pure, Int] = Stream.emit(element)
+  def createSingleton(element: Int): Stream[Pure, Int] = ???
 
-  def createStreamFromList(list: List[Int]): Stream[Pure, Int] = Stream.emits(list)
+  def createStreamFromList(list: List[Int]): Stream[Pure, Int] = ???
 
-  def convertStreamToList(finiteStream: Stream[Pure, String]): List[String] = finiteStream.toList
+  def convertStreamToList(finiteStream: Stream[Pure, String]): List[String] = ???
 
-  def createHyphenedString(list: List[String]): Stream[Pure, String] = Stream.emits(list).intersperse("-")
+  def createHyphenedString(list: List[String]): Stream[Pure, String] = ???
 
-  def mixPeopleWithTheirHeights(people: List[String], heights: List[String]): Stream[Pure, String] =
-    Stream.emits(people).interleave(Stream.emits(heights))
+  def mixPeopleWithTheirHeights(people: List[String], heights: List[String]): Stream[Pure, String] = ???
 
-  def pairSongsWithTheirRatings(songs: List[String], ratings: List[Int]): Stream[Pure, (String, Int)] =
-    Stream.emits(songs).zip(Stream.emits(ratings))
+  def pairSongsWithTheirRatings(songs: List[String], ratings: List[Int]): Stream[Pure, (String, Int)] = ???
 
-  def createIntegersFrom5to10(): Stream[Pure, Int] = Stream.range(5, 11)
+  def createIntegersFrom5to10(): Stream[Pure, Int] = ???
 
-  def createInfiniteTongueTwister(): Stream[Pure, String] = Stream("tres", "tristes", "tigres").repeat
+  def createInfiniteTongueTwister(): Stream[Pure, String] = ???
 
-  def createInfiniteStreamOfEvenNumbers(): Stream[Pure, Int] = Stream.iterate(0)(_ + 2)
+  def createInfiniteStreamOfEvenNumbers(): Stream[Pure, Int] = ???
 
-  def createInfiniteStreamOfOnes(): Stream[Pure, Int] = Stream.constant(1)
+  def createInfiniteStreamOfOnes(): Stream[Pure, Int] = ???
 
-  def takeFirstNaturalNumbers(naturalNumbers: Stream[Pure, Int], n: Int): Stream[Pure, Int] = naturalNumbers.take(n)
+  def takeFirstNaturalNumbers(naturalNumbers: Stream[Pure, Int], n: Int): Stream[Pure, Int] = ???
 
   case class Person(name: String, age: Int)
-  def getPeopleNames(people: Stream[Pure, Person]): Stream[Pure, String] = people.map(_.name)
+  def getPeopleNames(people: Stream[Pure, Person]): Stream[Pure, String] = ???
 
-  def getAdults(people: Stream[Pure, Person]): Stream[Pure, Person] = people.filter(_.age >= 21)
+  def getAdults(people: Stream[Pure, Person]): Stream[Pure, Person] = ???
 
-  def addIsPrettyCoolSuffix(words: Stream[Pure, String]): Stream[Pure, String] =
-    words ++ Stream("is", "pretty", "cool")
+  def addIsPrettyCoolSuffix(words: Stream[Pure, String]): Stream[Pure, String] = ???
 
-  def repeatEachWord(words: Stream[Pure, String]): Stream[Pure, String] = words.flatMap(s => Stream(s, s))
+  def repeatEachWord(words: Stream[Pure, String]): Stream[Pure, String] = ???
 
-  def sum(numbers: Stream[Pure, Int]): Stream[Pure, Int] = numbers.fold(0)(_+_)
+  def sum(numbers: Stream[Pure, Int]): Stream[Pure, Int] = ???
 
-  def countConsecutiveSuccessfulValues[A](stream: Stream[Pure, A]): Int = stream.attempt.toList.count(_.isRight)
+  def countConsecutiveSuccessfulValues[A](stream: Stream[Pure, A]): Int = ???
 }
